@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <title> Practica 1 </title>
+      <script type="text/javascript">
+
+        
+         var db = openDatabase('mydb', '1.0', 'Test DB', 7 * 1024 * 1024);
+       //  var db2 = openDatabase('mydb', '1.0', 'Test DB', 4 * 1024 * 1024);
+         var msg;
+         var msg2;
+			
+         db.transaction(function (tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS alumno (id_alumno unique, nombre, mat )');
+            tx.executeSql('INSERT INTO alumno (id_alumno, nombre, mat ) VALUES (1, "Ricardo", "194125")');
+            tx.executeSql('INSERT INTO alumno (id_alumno, nombre, mat ) VALUES (2, "Lidia", "19")');
+            tx.executeSql('INSERT INTO alumno (id_alumno, nombre, mat ) VALUES (3, "Melisa", "123")');
+            tx.executeSql('INSERT INTO alumno (id_alumno, nombre, mat ) VALUES (4, "Adrian", "111")');
+            tx.executeSql('INSERT INTO alumno (id_alumno, nombre, mat ) VALUES (5, "Samuel", "122")');
+            tx.executeSql('INSERT INTO alumno (id_alumno, nombre, mat ) VALUES (6, "Rosa", "333")');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS puntos (id_alumno unique, idpuntos TEXT, numpuntos INTEGER, fechap DATE)');
+            tx.executeSql('INSERT INTO puntos (id_alumno, idpuntos, numpuntos, fechap) VALUES (1, "P1", "500", "07/09/2017")');
+            tx.executeSql('INSERT INTO puntos (id_alumno, idpuntos, numpuntos, fechap) VALUES (2, "P2", "300", "01/09/2017")');
+            tx.executeSql('INSERT INTO puntos (id_alumno, idpuntos, numpuntos, fechap) VALUES (3, "P3", "100", "02/08/2017")');
+            tx.executeSql('INSERT INTO puntos (id_alumno, idpuntos, numpuntos, fechap) VALUES (4, "P4", "800", "05/06/2017")');
+            tx.executeSql('INSERT INTO puntos (id_alumno, idpuntos, numpuntos, fechap) VALUES (5, "P5", "150", "12/09/2017")');
+            tx.executeSql('INSERT INTO puntos (id_alumno, idpuntos, numpuntos, fechap) VALUES (6, "P6", "50", "03/07/2017")');
+             msg = '<p>puntos message created and row inserted.</p>';
+           // document.querySelector('#status').innerHTML +=  msg;
+         });
+        
+           function showResult()
+      {
+        // msg="";
+         x = document.forms["myform"]["newinput"].value;
+         document.forms["myform"]["result"].value=x;
+
+         db.transaction(function (tx) {
+             
+              // tx.executeSql('SELECT fechap,numpuntos FROM puntos WHERE  id_alumno=(SELECT id_alumno FROM alumno WHERE mat=?)',[x+""], 
+              tx.executeSql('SELECT alumno.nombre, puntos.fechap, puntos.numpuntos FROM puntos, alumno WHERE puntos.id_alumno = alumno.id_alumno AND alumno.mat=?',[x+""],
+               function (tx, results) {
+               var len = results.rows.length, i;
+               msg = "<p>Resultados: " + len + "</p>";
+               document.querySelector('#status2').innerHTML =  msg;
+					
+               for (i = 0; i < len; i++){
+                  msg = "<p><b>Nombre:"+results.rows.item(i).nombre+"<br>Fecha:" + results.rows.item(i).fechap +'<br> Puntos: '+results.rows.item(i).numpuntos+ "</b></p>";
+                  document.querySelector('#status2').innerHTML =  msg;
+               }
+            }, null);
+         });
+     }
+
+         
+//          db.transaction(function (tx) {
+//            tx.executeSql('UPDATE alumno set mat="12" where mat="194194" ', [], function (tx, results) {
+//              
+//               
+//            }, null);
+//         });
+
+  
+
+   
+      
+      </script>
+      <style>
+      .cuadro2{
+	padding: 5px;
+	border-radius: 9px 9px 9px 9px;
+	-moz-border-radius: 9px 9px 9px 9px;
+	-webkit-border-radius: 9px 9px 9px 9px;
+	background-color: #06F;
+	opacity: .8;
+	width: 900px;
+	margin: 10% auto;
+	font-family: Verdana, Geneva, sans-serif;
+        background-image:url(imagenes/blue-wallpaper5.jpg);
+	color: #FFF;
+	font-weight: bold;
+}
+.formato{
+    text-align:center;
+}
+	</style>	
+   </head>
+	
+   <body class="formato">
+     <!--header class="main"> <img src="imagenes/logo1.jpg" style="width:128px;height:128px;"><h1>Puntuajes</h1></header-->
+    
+       <section class="cuadro2">
+        <form action="" method="get" name="myform">
+         <br>Ingresa Matricula : <input type="text" name="newinput" /></br>
+         <br><input type="reset" value="Buscar Matricula"  onclick="showResult()" /></br>
+         <output name="result"></output>
+        </form>
+         
+       </section>
+       
+       
+       <div id="status" name="status"></div>  
+       <div id="status2" name="status2"></div>
+   </body>
+	
+</html>

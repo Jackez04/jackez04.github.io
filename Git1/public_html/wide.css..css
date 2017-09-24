@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+body	{ background: #999; }
+
+#page { content: "Wide Layout";}
+
+
+section	{ float:left; width:90%; heigh:200px;}
+footer	{ clear:both; display:block;}
+
+
