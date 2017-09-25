@@ -4,37 +4,27 @@
 *                                       { margin:0; padding:0;}
 body					{ font: 16px Georgia, "Times New Roman", Times, serif;}
 
-#page					{ margin:1% auto; color:#000;}
-#page > .main                           { border:1px solid #999; padding:1%; margin-bottom:1px;}
+#page2					{ margin:1% auto; color:#000;}
+#page2 > .main2                         { border:1px solid #999; padding:1%; margin-bottom:1px;}
 
-header, nav, section                    { background: rgba(0,0,0,0.3); }
-section, #titulo, h1                         {text-align:center; color:#FFF;}
+header2, nav2, section                    { background: rgba(0,0,0,0.3); }
+section2, #titulo2, h1                    {text-align:center; color:#FFF;}
 
-img#imagen				{
+#imagen2				{
 							display:block;
-							margin:auto;
-							width:90%;
-							max-height:80px;
-							padding:0.2%;
+                                                        
+                                                        bottom:1px; 
+							margin:.1%;
+							width:80%;
+                                                        height:80%;
+							padding:1px;
 							
 						}
-
-#imagen1,#imagen2,#imagen3,#imagen4,#imagen5,#imagen6,#imagen7,#imagen8,#imagen9,#imagen10,#imagen11{							
-							position:absolute;
-							margin:0 auto;
-							width:89%;
-							height:405px;
-							padding:1%;			
-							visibility:hidden;				
-							top:35%;
-							left:0%;
-							
-							}
 						
 footer						{background: #eee; text-align:center; bottom:0px; }
 				
-nav, ul                                         {margin:0%; padding:1%;}
-li                                              {display:inline;  
+nav2, ul2                                         {margin:0%; padding:1%;}
+li2                                              {display:inline;  
                                                     color:aqua;
                                                     font-family: verdana;
                                                     font-size: 100%;
